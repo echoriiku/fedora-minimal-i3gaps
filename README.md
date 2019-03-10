@@ -1,0 +1,1 @@
+# fedora-minimal-i3gaps
