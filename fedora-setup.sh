@@ -24,6 +24,8 @@ cargo install xplr zellij exa trashy dust
 
 # grab all packages to install from flatpak
 sudo flatpak remote-add flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak --user override --filesystem=/home/$USER/.icons/:ro
+flatpak --user override --filesystem=/usr/share/icons/:ro
 flatpak install flathub $(cat fedora.flatpackages) -y
 
 # enable fish
