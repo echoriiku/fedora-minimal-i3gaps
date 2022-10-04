@@ -23,7 +23,7 @@ sudo dnf install $(cat fedora.repopackages) -y
 sudo systemctl enable ly.service
 
 # Compile and install Cargo packages
-echo "export PATH=/home/$USER/.cargo/bin:$PATH" >> cargo.sh && move ./cargo.sh /etc/profile.d/
+echo "export PATH=/home/$USER/.cargo/bin:$PATH" >> cargo.sh && sudo mv ./cargo.sh /etc/profile.d/
 cargo install xplr zellij exa trashy dust
 
 # grab all packages to install from flatpak

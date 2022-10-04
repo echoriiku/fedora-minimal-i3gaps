@@ -23,10 +23,10 @@ xbacklight
 feh 
 conky 
 @base-x 
-@Fonts 
+@fonts 
 i3-gaps 
 rofi 
-@"Hardware Support" 
+@hardware-support
 kitty
 firefox 
 vim 
