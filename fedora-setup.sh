@@ -12,7 +12,6 @@ sudo dnf makecache
 
 # Enable COPRs
 sudo dnf copr enable -y atim/bottom
-sudo dnf copr enable -y atim/zoxide 
 sudo dnf copr enable -y varlad/helix
 sudo dnf copr enable -y atim/ly
 
