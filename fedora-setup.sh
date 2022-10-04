@@ -20,9 +20,7 @@ sudo dnf upgrade -y --refresh
 sudo dnf install $(cat fedora.repopackages) -y
 
 # grab all packages to install from flatpak
-sudo flatpak remote-add flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak --user override --filesystem=/home/$USER/.icons/:ro
-flatpak --user override --filesystem=/usr/share/icons/:ro
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub $(cat fedora.flatpackages) -y
 
 # Compile and install Cargo packages
