@@ -14,9 +14,13 @@ sudo dnf makecache
 sudo dnf copr enable -y atim/bottom
 sudo dnf copr enable -y atim/zoxide 
 sudo dnf copr enable -y varlad/helix
+sudo dnf copr enable -y atim/ly
 
 # grab all packages to install from repos
 sudo dnf install $(cat fedora.repopackages) -y
+
+# Enable Ly display manager service
+sudo systemctl enable ly.service
 
 # Compile and install Cargo packages
 echo "export PATH=/home/$USER/.cargo/bin:$PATH" >> cargo.sh && move ./cargo.sh /etc/profile.d/
