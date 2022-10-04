@@ -1,7 +1,6 @@
 #!/usr/bin/bash
 
 # DNF Config
-sudo dnf install -y dnf-plugins-core
 echo "max_parallel_downloads=20
 defaultyes=True
 fastestmirror=True" | sudo tee -a /etc/dnf/dnf.conf
