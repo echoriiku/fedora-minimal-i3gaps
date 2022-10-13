@@ -1,18 +1,18 @@
-#!/usr/bin/bash
+#!/bin/bash
 
-# DNF Config
+# DNF config
 echo "max_parallel_downloads=20
-defaultyes=True
-fastestmirror=True" | sudo tee -a /etc/dnf/dnf.conf
+defaultyes=True" | sudo tee -a /etc/dnf/dnf.conf
+
 sudo dnf clean all
 
-# Install Rpmfusion repo
+# install Rpmfusion repo
 sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
 
-# Enable COPRs
+# enable COPRs
 sudo dnf copr enable -y atim/bottom
 sudo dnf copr enable -y varlad/helix
-sudo dnf copr enable -y atim/ly
+sudo dnf copr enable -y tokariew/glow
 
 sudo dnf upgrade -y --refresh
 
@@ -23,12 +23,20 @@ sudo dnf install $(cat fedora.repopackages) -y
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub $(cat fedora.flatpackages) -y
 
-# Compile and install Cargo packages
-echo "export PATH=/home/$USER/.cargo/bin:$PATH" >> cargo.sh && sudo mv ./cargo.sh /etc/profile.d/
-cargo install {broot, du-dust, fd-find, toipe, trashy, tree-sitter-cli, xplr, zellij}
+# compile and install Cargo packages
+echo "export PATH='/home/$USER/.cargo/bin'" >> cargo.sh && sudo mv ./cargo.sh /etc/profile.d/
+cargo install $(cat fedora.cargopackages) 
 
-# Enable Ly display manager service
-sudo systemctl enable ly.service
+# alacritty theme changer
+sudo npm i -g alacritty-themes
 
 # enable fish
 chsh -s $(which fish)
+
+# setup dotfiles
+echo "Intalling Chezmoi"
+sh -c "$(curl -fsLS https://chezmoi.io/get)" -- -b $HOME/.local/bin
+chezmoi init --apply https://github.com/echoriiku/dotfiles.git
+
+sleep 3
+echo "Installation complete"
